@@ -1,0 +1,7 @@
+{
+    "name": "smart-web",
+    "short_name": "smart-web",
+    "gcm_sender_id": "411740235466",
+    "display": "standalone",
+    "gcm_user_visible_only": true
+}
