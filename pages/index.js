@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { PUSHWOOSH_SCRIPT } from '../config/pushwoosh.config';
 
 export default function Home() {
   return (
@@ -18,6 +19,12 @@ export default function Home() {
         ></script>
 
         <script
+          dangerouslySetInnerHTML={{
+            __html: PUSHWOOSH_SCRIPT
+          }}
+        />
+
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               var Pushwoosh = window.Pushwoosh || [];
@@ -41,7 +48,7 @@ export default function Home() {
               }]);
           `,
           }}
-        />
+        /> */}
       </Head>
 
       <main className={styles.main}>
