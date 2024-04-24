@@ -18,7 +18,7 @@ export default function Home() {
 
                 {/* <script src="https://cdn.pushpushgo.com/scripts/sdk.js"></script> */}
 
-                <script charset="UTF-8" src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"></script>
+                <script src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"></script>
                 {/* <Script charset="UTF-8" src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"/> */}
 
                 {/* <link rel="manifest" href="/manifest.json" />
