@@ -1,0 +1,57 @@
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+#viec-lam {
+  position: relative;
+  height: 300vh; // Chiều cao lớn hơn để tạo không gian cuộn
+}
+
+.job {
+  position: sticky;
+  top: 0;
+  height: 100vh; // Mỗi phần có chiều cao bằng một màn hình
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+
+#job1 {
+  background-color: lightcoral;
+  z-index: 1;
+}
+
+#job2 {
+  background-color: lightseagreen;
+  z-index: 2;
+}
+
+#job3 {
+  background-color: lightsalmon;
+  z-index: 3;
+}
+
+/* Hiệu ứng khi cuộn qua */
+.scrolled {
+  .job {
+    &.job1 {
+      background-color: lightcoral;
+    }
+
+    &.job2 {
+      background-color: lightseagreen;
+    }
+
+    &.job3 {
+      background-color: lightsalmon;
+    }
+  }
+}
