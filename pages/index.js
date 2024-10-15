@@ -10,7 +10,9 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script'
 import WelcomePopup from '../component/pop-up';
 
-const pushPushGoConfig= {
+const pushPushGoConfig = {
+    'nextjs-ppg.vercel.app': '670e2ec97004ee67a0f4bd85',
+    'nextjs-pushwoosh.vercel.app': '6616535545aef2aa169c8acb',
     'localhost:4200': '6616535545aef2aa169c8acb',
     'localhost:3000': '6616535545aef2aa169c8acb',
     // 'localhost:4200': '64896a37402e4ef3feb866c2',
@@ -21,6 +23,38 @@ const pushPushGoConfig= {
 
 export default function Home() {
     // const [showPopup, setShowPopup] = useState(false);
+
+    useEffect(() => {
+        // Chỉ chạy trên client-side
+        if (typeof window !== 'undefined') {
+            const hostname = window.location.hostname.replace(/^www\./, ''); // Loại bỏ 'www.' nếu có
+            const ppgId = pushPushGoConfig[hostname];
+
+            if (ppgId) {
+                // Thêm script PushPushGo vào DOM
+                const script = document.createElement('script');
+                script.src = `https://s-eu-1.pushpushgo.com/js/${ppgId}.js`;
+                script.async = true;
+                document.head.appendChild(script);
+
+                // Kiểm tra hỗ trợ Service Worker
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker
+                        .register(`/sw.js?ppgId=${ppgId}`)
+                        .then((registration) => {
+                            console.log('Service Worker registered for domain:', hostname);
+                        })
+                        .catch((error) => {
+                            console.error('Error registering Service Worker:', error);
+                        });
+                } else {
+                    console.warn('Service Worker not supported in this browser.');
+                }
+            } else {
+                console.warn('No PushPushGo config found for hostname:', hostname);
+            }
+        }
+    }, []);
 
     // Sử dụng useEffect để hiển thị popup khi user vào trang
     // useEffect(() => {
@@ -110,7 +144,7 @@ export default function Home() {
                 {/* <script src="https://cdn.pushpushgo.com/scripts/sdk.js"></script> */}
 
                 {/* <script src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"></script> */}
-                <script src="https://s-eu-1.pushpushgo.com/js/670e2ec97004ee67a0f4bd85.js" async="async"></script>
+                {/* <script src="https://s-eu-1.pushpushgo.com/js/670e2ec97004ee67a0f4bd85.js" async="async"></script> */}
                 {/* <script charset="UTF-8" src="https://s-eu-1.pushpushgo.com/js/670e2ec97004ee67a0f4bd85.js" async="async"></script> */}
 
                 {/* <Script charset="UTF-8" src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"/> */}
