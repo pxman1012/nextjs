@@ -17,14 +17,14 @@ function Job() {
   //   };
   // }, []);
 
-  const getClipPath = (jobIndex) => {
-    const start = jobIndex * window.innerHeight;
-    const end = (jobIndex + 1) * window.innerHeight;
-    const progress = Math.min(Math.max(scrollY - start, 0), window.innerHeight);
-    const clipPercent = (progress / window.innerHeight) * 100;
+  // const getClipPath = (jobIndex) => {
+  //   const start = jobIndex * window.innerHeight;
+  //   const end = (jobIndex + 1) * window.innerHeight;
+  //   const progress = Math.min(Math.max(scrollY - start, 0), window.innerHeight);
+  //   const clipPercent = (progress / window.innerHeight) * 100;
 
-    return `inset(0 0 ${clipPercent}% 0)`;
-  };
+  //   return `inset(0 0 ${clipPercent}% 0)`;
+  // };
 
   return (
     <div className={styles.app}>
@@ -35,7 +35,7 @@ function Job() {
 
       {/* Wrapper cố định cho các phần "Việc làm" */}
       <div className={styles.jobsWrapper}>
-        <section className={styles.jobsSection} id="viec-lam">
+        {/* <section className={styles.jobsSection} id="viec-lam">
           <div className={styles.job} style={{ clipPath: getClipPath(0) }}>
             <h2>Việc 1</h2>
           </div>
@@ -45,7 +45,7 @@ function Job() {
           <div className={styles.job} style={{ clipPath: getClipPath(2) }}>
             <h2>Việc 3</h2>
           </div>
-        </section>
+        </section> */}
       </div>
 
       <section className={styles.section} id="tong-ket">
