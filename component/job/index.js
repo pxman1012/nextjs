@@ -1,19 +1,21 @@
+'use client'
+
 import React, { useEffect, useState } from 'react';
 import styles from './Job.module.scss';
 
 function Job() {
   const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollY(window.scrollY);
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   const getClipPath = (jobIndex) => {
     const start = jobIndex * window.innerHeight;
