@@ -111,6 +111,7 @@ export default function Home() {
 
                 {/* <script src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"></script> */}
                 <script src="https://s-eu-1.pushpushgo.com/js/670e2ec97004ee67a0f4bd85.js" async="async"></script>
+                {/* <script charset="UTF-8" src="https://s-eu-1.pushpushgo.com/js/670e2ec97004ee67a0f4bd85.js" async="async"></script> */}
 
                 {/* <Script charset="UTF-8" src="https://s-eu-1.pushpushgo.com/js/6616535545aef2aa169c8acb.js" async="async"/> */}
 
