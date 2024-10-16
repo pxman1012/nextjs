@@ -56,26 +56,95 @@ export default function Home() {
     //     }
     // }, []);
 
+    // useEffect(() => {
+    //     // Chỉ đăng ký một lần service worker
+    //     if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
+    //         const hostname = window.location.hostname.replace(/^www\./, '');
+    //         const ppgId = pushPushGoConfig[hostname];
+
+    //         if (ppgId) {
+    //             navigator.serviceWorker
+    //                 .register(`/sw.js?ppgId=${ppgId}`)
+    //                 .then((registration) => {
+    //                     console.log('Service Worker registered for domain:', hostname);
+    //                 })
+    //                 .catch((error) => {
+    //                     console.error('Error registering Service Worker:', error);
+    //                 });
+    //         } else {
+    //             console.warn('No PushPushGo config found for hostname:', hostname);
+    //         }
+    //     }
+    // }, []);
+
     useEffect(() => {
-        // Chỉ đăng ký một lần service worker
-        if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
-            const hostname = window.location.hostname.replace(/^www\./, '');
+        // Chỉ chạy trên client-side
+        if (typeof window !== 'undefined') {
+            const hostname = window.location.hostname.replace(/^www\./, ''); // Loại bỏ 'www.' nếu có
             const ppgId = pushPushGoConfig[hostname];
-    
+
             if (ppgId) {
-                navigator.serviceWorker
-                    .register(`/sw.js?ppgId=${ppgId}`)
-                    .then((registration) => {
-                        console.log('Service Worker registered for domain:', hostname);
-                    })
-                    .catch((error) => {
-                        console.error('Error registering Service Worker:', error);
-                    });
+                // Thêm script PushPushGo vào DOM
+                const script = document.createElement('script');
+                script.src = `https://s-eu-1.pushpushgo.com/js/${ppgId}.js`;
+                script.async = true;
+                document.head.appendChild(script);
+
+                // Kiểm tra hỗ trợ Service Worker
+                if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
+                    navigator.serviceWorker
+                        .register(`/sw.js?ppgId=${ppgId}`)
+                        .then((registration) => {
+                            console.log('Service Worker registered for domain:', hostname);
+                        })
+                        .catch((error) => {
+                            console.error('Error registering Service Worker:', error);
+                        });
+                }
+
+                // Kiểm tra nếu PushPushGo đã được tải
+                const checkPushPushGoLoaded = () => {
+                    if (typeof window.PushPushGo !== 'undefined') {
+                        const pushClient = window.PushPushGo;
+
+                        // Kiểm tra hỗ trợ Push Notifications
+                        pushClient.isPushSupport()
+                            .then(() => {
+                                console.log('Push notifications are supported.');
+
+                                // Kiểm tra người dùng đã đăng ký chưa
+                                return pushClient.isSubscribed();
+                            })
+                            .then((isSubscribed) => {
+                                if (!isSubscribed) {
+                                    // Nếu chưa đăng ký, hiển thị dialog subscribe
+                                    return pushClient.register();
+                                } else {
+                                    console.log('User is already subscribed.');
+                                }
+                            })
+                            .then((subscriberId) => {
+                                if (subscriberId) {
+                                    console.log('User subscribed successfully with ID:', subscriberId);
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('Error during subscription:', error);
+                            });
+                    } else {
+                        // Nếu PushPushGo chưa được tải, chờ 1 chút và kiểm tra lại
+                        setTimeout(checkPushPushGoLoaded, 500);
+                    }
+                };
+
+                // Gọi hàm kiểm tra PushPushGo
+                checkPushPushGoLoaded();
             } else {
                 console.warn('No PushPushGo config found for hostname:', hostname);
             }
         }
     }, []);
+
 
     // Sử dụng useEffect để hiển thị popup khi user vào trang
     // useEffect(() => {
