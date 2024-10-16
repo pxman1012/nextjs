@@ -35,7 +35,7 @@ export default function Home() {
                 const script = document.createElement('script');
                 // importScripts(`https://cdn.pushpushgo.com/${ppgId}/worker.js`);
                 script.src = `https://cdn.pushpushgo.com/js/${ppgId}.js`;
-                script.src = `https://s-eu-1.pushpushgo.com/js/${ppgId}.js`;
+                // script.src = `https://s-eu-1.pushpushgo.com/js/${ppgId}.js`;
                 script.async = true;
                 document.head.appendChild(script);
 
