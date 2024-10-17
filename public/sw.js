@@ -26,11 +26,15 @@ self.addEventListener('install', (event) => {
     const urlParams = new URL(self.location).searchParams;
     const ppgId = urlParams.get('ppgId');
 
+    console.log('addEventListener==============', ppgId)
     if (ppgId) {
         if (!self.importedScripts) {
+            console.log('!self.importedScripts==============', !self.importedScripts)
             // importScripts(`https://cdn.pushpushgo.com/${ppgId}/worker.js`);
             importScripts(`https://s-eu-1.pushpushgo.com/${ppgId}/worker.js`);
             self.importedScripts = true; // Tránh import lại script
+            console.log('done==============')
+            
         }
     } else {
         console.error('No PPG ID provided in the service worker.');

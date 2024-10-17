@@ -15,6 +15,7 @@ const pushPushGoConfig = {
     'nextjs-pushwoosh.vercel.app': '6616535545aef2aa169c8acb',
     'localhost:4200': '6616535545aef2aa169c8acb',
     'localhost:3000': '670e2ec97004ee67a0f4bd85',
+    'localhost': '670e2ec97004ee67a0f4bd85',
     // 'localhost:4200': '64896a37402e4ef3feb866c2',
     // 'polsatboxgo.pl': '64896a37402e4ef3feb866c2',
     // 'www.elevensports.pl': '648bf3b3599526d9fc5c70bc',
@@ -28,7 +29,12 @@ export default function Home() {
         // Chỉ chạy trên client-side
         if (typeof window !== 'undefined') {
             const hostname = window.location.hostname.replace(/^www\./, ''); // Loại bỏ 'www.' nếu có
+            console.log('hostname==============', hostname)
+            
             const ppgId = pushPushGoConfig[hostname];
+            console.log('ppgId==============', ppgId)
+            debugger
+
 
             if (ppgId) {
                 // Thêm script PushPushGo vào DOM
