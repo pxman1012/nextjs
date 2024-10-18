@@ -13,8 +13,9 @@ import WelcomePopup from '../component/pop-up';
 const pushPushGoConfig = {
     'nextjs-ppg.vercel.app': '670e2ec97004ee67a0f4bd85',
     'nextjs-pushwoosh.vercel.app': '6616535545aef2aa169c8acb',
-    'localhost:4200': '6616535545aef2aa169c8acb',
-    'localhost:3000': '670e2ec97004ee67a0f4bd85',
+    'nextjs-test-ppg.vercel.app': '67120c731983c8ad65299c96',
+    // 'localhost:4200': '6616535545aef2aa169c8acb',
+    // 'localhost:3000': '670e2ec97004ee67a0f4bd85',
     'localhost': '670e2ec97004ee67a0f4bd85',
     // 'localhost:4200': '64896a37402e4ef3feb866c2',
     // 'polsatboxgo.pl': '64896a37402e4ef3feb866c2',
@@ -33,7 +34,7 @@ export default function Home() {
             
             const ppgId = pushPushGoConfig[hostname];
             console.log('ppgId==============', ppgId)
-            debugger
+            // debugger
 
 
             if (ppgId) {
